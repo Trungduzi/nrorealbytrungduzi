@@ -11,6 +11,6 @@ app.use(router);
 
 const port = process.env.PORT;
 
-app.listen(port, () => {
-    console.log("Máy chủ đang chạy trên http://localhost:" + port);
-})
+app.listen(port, '0.0.0.0', () => {
+    console.log(`Máy chủ đang chạy trên cổng ${port}`);
+});

@@ -9,7 +9,7 @@ const app = express();
 configViewEngine(app);
 app.use(router);
 
-const port = process.env.PORT;
+const port = process.env.PORT || 8080;
 
 app.listen(port, '0.0.0.0', () => {
     console.log(`Máy chủ đang chạy trên cổng ${port}`);

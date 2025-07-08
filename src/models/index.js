@@ -14,16 +14,17 @@ const db = {};
 
 // ✅ Kết nối Sequelize từ biến môi trường Railway
 const sequelize = new Sequelize(
-  process.env.MYSQLDATABASE,
-  process.env.MYSQLUSER,
-  process.env.MYSQLPASSWORD,
+  process.env.DB_DATABASE,
+  process.env.DB_USERNAME,
+  process.env.DB_PASSWORD,
   {
-    host: process.env.MYSQLHOST,
-    port: process.env.MYSQLPORT,
+    host: process.env.DB_HOST,
+    port: process.env.DB_PORT,
     dialect: 'mysql',
     logging: false,
   }
 );
+
 
 // ✅ Đọc và import tất cả model
 const files = fs.readdirSync(__dirname).filter((file) => {

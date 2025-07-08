@@ -1,26 +1,26 @@
 {
   "development": {
-    "username": "${MYSQLUSER}",
-    "password": "${MYSQLPASSWORD}",
-    "database": "${MYSQLDATABASE}",
-    "host": "${MYSQLHOST}",
-    "port": "${MYSQLPORT}",
+    "username": "${DB_USERNAME}",
+    "password": "${DB_PASSWORD}",
+    "database": "${DB_DATABASE}",
+    "host": "${DB_HOST}",
+    "port": "${DB_PORT}",
     "dialect": "mysql"
   },
   "test": {
-    "username": "${MYSQLUSER}",
-    "password": "${MYSQLPASSWORD}",
-    "database": "${MYSQLDATABASE}",
-    "host": "${MYSQLHOST}",
-    "port": "${MYSQLPORT}",
+    "username": "${DB_USERNAME}",
+    "password": "${DB_PASSWORD}",
+    "database": "${DB_DATABASE}",
+    "host": "${DB_HOST}",
+    "port": "${DB_PORT}",
     "dialect": "mysql"
   },
   "production": {
-    "username": "${MYSQLUSER}",
-    "password": "${MYSQLPASSWORD}",
-    "database": "${MYSQLDATABASE}",
-    "host": "${MYSQLHOST}",
-    "port": "${MYSQLPORT}",
+    "username": "${DB_USERNAME}",
+    "password": "${DB_PASSWORD}",
+    "database": "${DB_DATABASE}",
+    "host": "${DB_HOST}",
+    "port": "${DB_PORT}",
     "dialect": "mysql"
   }
 }

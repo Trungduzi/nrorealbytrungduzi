@@ -3,26 +3,35 @@ import path from 'path';
 import { fileURLToPath, pathToFileURL } from 'url';
 import Sequelize from 'sequelize';
 import process from 'process';
-import configJson from '../config/config.json' with { type: 'json' };
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const basename = path.basename(__filename);
 const env = process.env.NODE_ENV || 'development';
-const config = configJson[env];
 
 const db = {};
 
-let sequelize;
-if (config.use_env_variable) {
-  sequelize = new Sequelize(process.env[config.use_env_variable], config);
-} else {
-  sequelize = new Sequelize(config.database, config.username, config.password, config);
-}
+// ✅ Kết nối Sequelize từ biến môi trường Railway
+const sequelize = new Sequelize(
+  process.env.MYSQLDATABASE,
+  process.env.MYSQLUSER,
+  process.env.MYSQLPASSWORD,
+  {
+    host: process.env.MYSQLHOST,
+    port: process.env.MYSQLPORT,
+    dialect: 'mysql',
+    logging: false,
+  }
+);
 
+// ✅ Đọc và import tất cả model
 const files = fs.readdirSync(__dirname).filter((file) => {
-  return file.indexOf('.') !== 0 && file !== basename && file.slice(-3) === '.js';
+  return (
+    file.indexOf('.') !== 0 &&
+    file !== basename &&
+    file.slice(-3) === '.js'
+  );
 });
 
 for (const file of files) {
@@ -32,14 +41,13 @@ for (const file of files) {
   db[model.name] = model;
 }
 
-// ✅ Gọi associate cho tất cả model
+// ✅ Gọi associate nếu có
 for (const modelName of Object.keys(db)) {
   if (db[modelName].associate) {
     db[modelName].associate(db);
   }
 }
 
-// ✅ Export thêm
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 

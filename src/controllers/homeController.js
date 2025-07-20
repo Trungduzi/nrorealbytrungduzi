@@ -222,8 +222,16 @@ const historyCard = async (addCard, userId, receive, statusSv) => {
 
 const getHistoryCard = async (req, res) => {
     try {
-        const cardExpress = await db.history.findAll();
-        return res.status(200).json(cardExpress);
+        const userId = req.query.id;
+        console.log(userId);
+        const cardExpress = await db.history.findAll({
+            where: { userId: userId },
+            order: [['createdAt', 'DESC']] // mới nhất trước
+        });
+        return res.status(200).json({
+            id: userId,
+            user: cardExpress,
+        });
     } catch (error) {
         console.error("Lỗi getCardbe:", error);
         return res.status(500).json({ error: "Lỗi server khi lấy Card" });

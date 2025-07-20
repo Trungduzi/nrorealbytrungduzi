@@ -14,8 +14,6 @@ export default (sequelize) => {
       price: DataTypes.STRING,
       code: DataTypes.STRING,
       serial: DataTypes.STRING,
-      username: DataTypes.STRING,
-      dollar: DataTypes.STRING,
     },
     {
       sequelize,

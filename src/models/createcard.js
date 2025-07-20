@@ -21,6 +21,7 @@ export default (sequelize) => {
     {
       sequelize,
       modelName: "createCard",
+      freezeTableName: true
     }
   );
 

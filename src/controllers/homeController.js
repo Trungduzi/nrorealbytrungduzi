@@ -228,10 +228,7 @@ const getHistoryCard = async (req, res) => {
             where: { userId: userId },
             order: [['createdAt', 'DESC']] // mới nhất trước
         });
-        return res.status(200).json({
-            id: userId,
-            user: cardExpress,
-        });
+        return res.status(200).json(cardExpress);
     } catch (error) {
         console.error("Lỗi getCardbe:", error);
         return res.status(500).json({ error: "Lỗi server khi lấy Card" });

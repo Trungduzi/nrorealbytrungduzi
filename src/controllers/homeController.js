@@ -220,6 +220,16 @@ const historyCard = async (addCard, userId, receive, statusSv) => {
     }
 }
 
+const getHistoryCard = async (req, res) => {
+    try {
+        const cardExpress = await db.history.findAll();
+        return res.status(200).json(cardExpress);
+    } catch (error) {
+        console.error("Lỗi getCardbe:", error);
+        return res.status(500).json({ error: "Lỗi server khi lấy Card" });
+    }
+}
+
 export default {
     createUser,
     getAllUser,
@@ -227,4 +237,5 @@ export default {
     createCard,
     napCard,
     getHistory,
+    getHistoryCard,
 };

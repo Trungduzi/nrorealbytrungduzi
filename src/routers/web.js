@@ -11,5 +11,6 @@ router.post("/api/admin/create-card", homeController.createCard);
 router.post("/api/nap-card", homeController.napCard);
 router.post("/api/get-history", homeController.getHistory);
 router.get("/api/get-historycard", homeController.getHistoryCard);
+router.post("/api/reset-password", homeController.resetPassword);
 
 export default router;

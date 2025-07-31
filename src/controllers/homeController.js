@@ -220,7 +220,7 @@ const historyCard = async (addCard, userId, receive, statusSv) => {
     }
 }
 
-const getHistoryCard = async (req, res) => {
+const getHistoryCard = async (req, res, userId) => {
     try {
         const userId = req.query.id;
         console.log(userId);
@@ -235,6 +235,25 @@ const getHistoryCard = async (req, res) => {
     }
 }
 
+const resetPassword = async (req, res) => {
+    try {
+        const { password, newPassword, confirmPassword } = req.body;
+        const user = await db.createUser.update(
+            { password: hashUserPassword(password) },
+            { where: { id: userId } }
+        );
+        return res.status(201).json({
+            status: true,
+            message: "Đổi mật khẩu thành công!",
+            user: user,
+        });
+    }
+    catch (e) {
+        console.error("Lỗi ở homeController", e);
+        return res.status(500).json({ error: "Lỗi server" });
+    }
+}
+
 export default {
     createUser,
     getAllUser,
@@ -243,4 +262,5 @@ export default {
     napCard,
     getHistory,
     getHistoryCard,
+    resetPassword,
 };

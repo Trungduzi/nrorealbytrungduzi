@@ -238,6 +238,7 @@ const getHistoryCard = async (req, res, userId) => {
 const resetPassword = async (req, res) => {
     try {
         const { id, password, newPassword, confirmPassword } = req.body;
+        console.log(id, password, newPassword, confirmPassword);
         const user = await db.creatUser.findOne({ where: { id } });
         if (!user) {
             return res.status(404).json({ error: "Người dùng không tồn tại" });

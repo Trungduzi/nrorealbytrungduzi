@@ -252,8 +252,9 @@ const resetPassword = async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ error: "Mật khẩu cũ không đúng" });
         }
+        const hashPW = await hashUserPassword(newPassword);
         const userReset = await db.creatUser.update(
-            { password: hashUserPassword(newPassword) },
+            { password: hashPW },
             { where: { id } }
         );
         return res.status(201).json({

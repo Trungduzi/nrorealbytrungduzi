@@ -237,15 +237,28 @@ const getHistoryCard = async (req, res, userId) => {
 
 const resetPassword = async (req, res) => {
     try {
-        const { password, newPassword, confirmPassword } = req.body;
-        const user = await db.createUser.update(
-            { password: hashUserPassword(password) },
-            { where: { id: userId } }
+        const { id, password, newPassword, confirmPassword } = req.body;
+        const user = await db.createUser.findOne({ where: { id } });
+        if (!user) {
+            return res.status(404).json({ error: "Người dùng không tồn tại" });
+        }
+
+        if (newPassword !== confirmPassword) {
+            return res.status(400).json({ error: "Mật khẩu nhập lại không khớp" });
+        }
+
+        const isMatch = bcrypt.compareSync(password, user.password);
+        if (!isMatch) {
+            return res.status(401).json({ error: "Mật khẩu cũ không đúng" });
+        }
+        const userReset = await db.createUser.update(
+            { password: hashUserPassword(newPassword) },
+            { where: { id } }
         );
         return res.status(201).json({
             status: true,
             message: "Đổi mật khẩu thành công!",
-            user: user,
+            user: userReset,
         });
     }
     catch (e) {

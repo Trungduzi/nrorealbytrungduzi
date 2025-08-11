@@ -238,7 +238,7 @@ const getHistoryCard = async (req, res, userId) => {
 const resetPassword = async (req, res) => {
     try {
         const { id, password, newPassword, confirmPassword } = req.body;
-        const user = await db.createUser.findOne({ where: { id } });
+        const user = await db.creatUsers.findOne({ where: { id } });
         if (!user) {
             return res.status(404).json({ error: "Người dùng không tồn tại" });
         }
@@ -251,7 +251,7 @@ const resetPassword = async (req, res) => {
         if (!isMatch) {
             return res.status(401).json({ error: "Mật khẩu cũ không đúng" });
         }
-        const userReset = await db.createUser.update(
+        const userReset = await db.creatUsers.update(
             { password: hashUserPassword(newPassword) },
             { where: { id } }
         );

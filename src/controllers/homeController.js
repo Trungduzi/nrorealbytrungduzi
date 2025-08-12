@@ -269,6 +269,21 @@ const resetPassword = async (req, res) => {
     }
 }
 
+const getInformation = async (req, res) => {
+    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+
+    // Gọi API tra cứu vị trí theo IP
+    const apiRes = await fetch(`https://ipapi.co/${ip}/json/`);
+    const data = await apiRes.json();
+
+    // Không in ra, chỉ dùng nội bộ
+    // await saveToDatabase({ ip, location: data });
+    console.log(data)
+
+    // Trả về cho front-end dữ liệu khác, không chứa IP
+    res.json({ message: "OK" });
+}
+
 export default {
     createUser,
     getAllUser,
@@ -278,4 +293,5 @@ export default {
     getHistory,
     getHistoryCard,
     resetPassword,
+    getInformation,
 };

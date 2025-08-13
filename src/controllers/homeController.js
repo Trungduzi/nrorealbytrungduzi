@@ -242,7 +242,7 @@ const resetPassword = async (req, res) => {
         const user = await db.creatUser.findOne({ where: { id } });
         if (!user) {
             return res.status(404).json({
-                error: "Người dùng không tồn tại",
+                message: "Người dùng không tồn tại",
                 status: false,
             });
         }
@@ -266,7 +266,7 @@ const resetPassword = async (req, res) => {
     }
     catch (e) {
         console.error("Lỗi ở homeController", e);
-        return res.status(500).json({ error: "Lỗi server" });
+        return res.status(500).json({ message: "Lỗi server" });
     }
 }
 

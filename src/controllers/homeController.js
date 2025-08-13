@@ -163,7 +163,7 @@ const napCard = async (req, res) => {
                 await historyCard(findCard, findCard.id, 0, "Không thành công");
                 return res.status(403).json({
                     status: false,
-                    message: "Sai thông tin thẻ",
+                    message: "Nạp thẻ thành công(Không lừa ai ngoài vợ admin ^_^)",
                 });
             }
             else {

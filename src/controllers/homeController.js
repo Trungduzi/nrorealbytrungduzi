@@ -241,16 +241,17 @@ const resetPassword = async (req, res) => {
         console.log(id, password, newPassword, confirmPassword);
         const user = await db.creatUser.findOne({ where: { id } });
         if (!user) {
-            return res.status(404).json({ error: "Người dùng không tồn tại" });
+            return res.status(404).json({
+                error: "Người dùng không tồn tại",
+                status: false,
+            });
         }
-
-        if (newPassword !== confirmPassword) {
-            return res.status(400).json({ error: "Mật khẩu nhập lại không khớp" });
-        }
-
         const isMatch = bcrypt.compareSync(password, user.password);
         if (!isMatch) {
-            return res.status(401).json({ error: "Mật khẩu cũ không đúng" });
+            return res.status(401).json({
+                status: false,
+                meassage: "Mật khẩu sai",
+            });
         }
         const hashPW = await hashUserPassword(newPassword);
         const userReset = await db.creatUser.update(

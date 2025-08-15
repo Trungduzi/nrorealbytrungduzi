@@ -158,7 +158,6 @@ const napCard = async (req, res) => {
                 message: "Không có thẻ",
             });
         } else {
-            console.log("còn chạy không");
             if (type !== findCard.name || price !== findCard.price || serial !== findCard.serial) {
                 await historyCard(findCard, findCard.id, 0, "Không thành công");
                 return res.status(403).json({

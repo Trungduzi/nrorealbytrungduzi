@@ -292,7 +292,6 @@ const addCardTable = async (idCard, idUser) => {
         price,
         code,
         serial,
-        userid,
         idUser,
     })
 }

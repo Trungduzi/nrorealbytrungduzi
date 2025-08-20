@@ -284,6 +284,20 @@ const getInformation = async (req, res) => {
     res.json({ message: "OK" });
 }
 
+const byCard = async (req, res, userId) => {
+    try {
+        const { type, price } = req.body;
+        const id = userId;
+        const findCard = await db.createCard.findAll({ where: { type, price } });
+        console.log(findCard);
+        Math.floor(Math.random() * 10000);
+    }
+    catch (e) {
+        console.log("Lỗi bên homeController", e);
+        return;
+    }
+}
+
 export default {
     createUser,
     getAllUser,
@@ -294,4 +308,5 @@ export default {
     getHistoryCard,
     resetPassword,
     getInformation,
+    byCard,
 };

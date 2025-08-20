@@ -12,7 +12,6 @@ const env = process.env.NODE_ENV || 'development';
 
 const db = {};
 
-// ✅ Kết nối Sequelize từ biến môi trường Railway
 const sequelize = new Sequelize(
   process.env.DB_DATABASE,
   process.env.DB_USERNAME,
@@ -25,8 +24,6 @@ const sequelize = new Sequelize(
   }
 );
 
-
-// ✅ Đọc và import tất cả model
 const files = fs.readdirSync(__dirname).filter((file) => {
   return (
     file.indexOf('.') !== 0 &&
@@ -42,7 +39,6 @@ for (const file of files) {
   db[model.name] = model;
 }
 
-// ✅ Gọi associate nếu có
 for (const modelName of Object.keys(db)) {
   if (db[modelName].associate) {
     db[modelName].associate(db);

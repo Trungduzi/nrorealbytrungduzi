@@ -328,7 +328,7 @@ const byCard = async (req, res) => {
         }
     }
     catch (e) {
-        console.log("Lỗi bên homeController", e);
+        console.log("Lỗi bên homeController");
         return;
     }
 }

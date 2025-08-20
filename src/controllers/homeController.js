@@ -301,8 +301,9 @@ const addCardTable = async (idCard, idUser) => {
     });
 }
 
-const byCard = async (req, res, userid) => {
+const byCard = async (req, res, userId) => {
     try {
+        console.log(userId);
         const { type, price } = req.body;
         const id = userId;
         try {

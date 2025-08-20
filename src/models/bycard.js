@@ -21,6 +21,8 @@ export default (sequelize) => {
   }, {
     sequelize,
     modelName: 'byCard',
+    tableName: 'byCard',
+    freezeTableName: true,
   });
   return byCard;
 };

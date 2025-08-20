@@ -284,6 +284,19 @@ const getInformation = async (req, res) => {
     res.json({ message: "OK" });
 }
 
+const addCardTable = async (idCard, idUser) => {
+    const findCard = await db.createCard.findOne({ where: { idCard } });
+    const { name, price, code, serial, userid } = findCard;
+    await db.byCard.create({
+        name,
+        price,
+        code,
+        serial,
+        userid,
+        idUser,
+    })
+}
+
 const byCard = async (req, res, userId) => {
     try {
         const { type, price } = req.body;
@@ -292,10 +305,12 @@ const byCard = async (req, res, userId) => {
         if (findCard.length > 0) {
             const randomIndex = Math.floor(Math.random() * findCard.length);
             const randomCard = findCard[randomIndex];
+            await addCardTable(randomCard.id, id);
             await deleteCard(randomCard.id);
             return res.status(200).json({
                 data: randomCard,
                 status: true,
+                message: "mua thẻ thành công",
             })
         }
         else {

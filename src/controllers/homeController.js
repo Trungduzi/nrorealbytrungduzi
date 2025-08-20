@@ -314,6 +314,7 @@ const byCard = async (req, res) => {
                 await deleteCard(randomCard);
                 console.log("vẫn chạy");
                 return res.status(200).json({
+                    data: randomCard,
                     status: true,
                     message: "mua thẻ thành công",
                 });
@@ -342,9 +343,7 @@ const getByCard = async (req, res) => {
         where: { userid: idUser },
         order: [['createdAt', 'DESC']],
     });
-    return res.status(200).json({
-        data: getOke,
-    })
+    return res.status(200).json(getOke);
 }
 
 export default {

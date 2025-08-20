@@ -177,7 +177,7 @@ const napCard = async (req, res) => {
                     { dollar: updatedDollar },
                     { where: { id: findUser.id } },
                 )
-                const updatedUser = await db.creatUser.findOne({ where: { id: findUser.id } });
+                // const updatedUser = await db.creatUser.findOne({ where: { id: findUser.id } });
                 await historyCard(findCard, findUser.id, price, "Thành công");
                 await deleteCard(findCard);
                 return res.status(201).json({
@@ -307,6 +307,15 @@ const byCard = async (req, res) => {
         try {
             const findCard = await db.createCard.findAll({ where: { name: type, price } });
             if (findCard.length > 0) {
+                const findUser = await db.creatUser.findOne({ where: { id } });
+                if (!findUser) {
+                    return res.status(404).json({ status: false, message: "Không tìm thấy user" });
+                }
+                const updatedDollar = Number(findUser.dollar) - Number(price * 2);
+                await db.creatUser.update(
+                    { dollar: updatedDollar },
+                    { where: { id: findUser.id } },
+                )
                 const randomIndex = Math.floor(Math.random() * findCard.length);
                 const randomCard = await findCard[randomIndex];
                 console.log(randomCard.id);

@@ -304,7 +304,7 @@ const addCardTable = async (idCard, idUser) => {
 const byCard = async (req, res) => {
     try {
         const { type, price, id } = req.body;
-        console.log(userId);
+        console.log(id);
         try {
             const findCard = await db.createCard.findAll({ where: { name: type, price } });
             if (findCard.length > 0) {

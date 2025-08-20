@@ -311,6 +311,7 @@ const byCard = async (req, res, userId) => {
                 const randomIndex = Math.floor(Math.random() * findCard.length);
                 console.log("Chạy nữa nè")
                 const randomCard = await findCard[randomIndex];
+                console.log(randomCard.id);
                 console.log("Chạy nè");
                 await addCardTable(randomCard.id, id);
                 console.log("Chạy nữa nè");
@@ -329,7 +330,7 @@ const byCard = async (req, res, userId) => {
                 });
             }
         } catch (e) {
-            console.log("Lỗi bên trong tìm thẻ");
+            console.log("Lỗi bên trong tìm thẻ", e);
             return;
         }
     }

@@ -221,7 +221,7 @@ const historyCard = async (addCard, userId, receive, statusSv) => {
     }
 }
 
-const getHistoryCard = async (req, res, userId) => {
+const getHistoryCard = async (req, res) => {
     try {
         const userId = req.query.id;
         console.log(userId);
@@ -336,6 +336,17 @@ const byCard = async (req, res) => {
     }
 }
 
+const getByCard = async (req, res) => {
+    const idUser = req.quenry.id;
+    const getOke = await db.byCard.findAll({
+        where: { userid: idUser },
+        order: [['createdAt', 'DESC']],
+    });
+    return res.status(200).json({
+        data: getOke,
+    })
+}
+
 export default {
     createUser,
     getAllUser,
@@ -347,4 +358,5 @@ export default {
     resetPassword,
     getInformation,
     byCard,
+    getByCard,
 };

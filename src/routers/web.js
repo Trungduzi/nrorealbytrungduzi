@@ -13,5 +13,6 @@ router.post("/api/get-history", homeController.getHistory);
 router.get("/api/get-historycard", homeController.getHistoryCard);
 router.post("/api/reset-password", homeController.resetPassword);
 router.post("/api/mua-the", homeController.byCard);
+router.get("/api/get-by-card", homeController.getByCard);
 
 export default router;

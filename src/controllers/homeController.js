@@ -289,8 +289,21 @@ const byCard = async (req, res, userId) => {
         const { type, price } = req.body;
         const id = userId;
         const findCard = await db.createCard.findAll({ where: { name: type, price } });
-        console.log(findCard);
-        Math.floor(Math.random() * 10000);
+        if (findCard.length > 0) {
+            const randomIndex = Math.floor(Math.random() * findCard.length);
+            const randomCard = findCard[randomIndex];
+            await deleteCard(randomCard.id);
+            return res.status(200).json({
+                data: randomCard,
+                status: true,
+            })
+        }
+        else {
+            return res.status(204).json({
+                message: "Hệ thống đang hết thẻ loại và mệnh giá này",
+                status: false,
+            });
+        }
     }
     catch (e) {
         console.log("Lỗi bên homeController", e);

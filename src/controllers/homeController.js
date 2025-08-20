@@ -288,7 +288,7 @@ const byCard = async (req, res, userId) => {
     try {
         const { type, price } = req.body;
         const id = userId;
-        const findCard = await db.createCard.findAll({ where: { type, price } });
+        const findCard = await db.createCard.findAll({ where: { name: type, price } });
         console.log(findCard);
         Math.floor(Math.random() * 10000);
     }

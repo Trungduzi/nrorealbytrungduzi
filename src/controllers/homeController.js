@@ -337,7 +337,8 @@ const byCard = async (req, res) => {
 }
 
 const getByCard = async (req, res) => {
-    const idUser = req.quenry.id;
+    const idUser = req.query.id;
+    console.log(idUser);
     const getOke = await db.byCard.findAll({
         where: { userid: idUser },
         order: [['createdAt', 'DESC']],

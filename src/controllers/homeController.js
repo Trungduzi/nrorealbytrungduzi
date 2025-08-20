@@ -295,10 +295,6 @@ const addCardTable = async (idCard, idUser) => {
         serial,
         userid,
     })
-    return res.status(201).json({
-        status: true,
-        message: 'Mua thẻ thành công',
-    });
 }
 
 const byCard = async (req, res) => {

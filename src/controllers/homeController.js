@@ -301,23 +301,28 @@ const byCard = async (req, res, userId) => {
     try {
         const { type, price } = req.body;
         const id = userId;
-        const findCard = await db.createCard.findAll({ where: { name: type, price } });
-        if (findCard.length > 0) {
-            const randomIndex = Math.floor(Math.random() * findCard.length);
-            const randomCard = findCard[randomIndex];
-            await addCardTable(randomCard.id, id);
-            await deleteCard(randomCard.id);
-            return res.status(200).json({
-                data: randomCard,
-                status: true,
-                message: "mua thẻ thành công",
-            })
-        }
-        else {
-            return res.status(204).json({
-                message: "Hệ thống đang hết thẻ loại và mệnh giá này",
-                status: false,
-            });
+        try {
+            const findCard = await db.createCard.findAll({ where: { name: type, price } });
+            if (findCard.length > 0) {
+                const randomIndex = Math.floor(Math.random() * findCard.length);
+                const randomCard = await findCard[randomIndex];
+                await addCardTable(randomCard.id, id);
+                await deleteCard(randomCard.id);
+                return res.status(200).json({
+                    data: randomCard,
+                    status: true,
+                    message: "mua thẻ thành công",
+                });
+            }
+            else {
+                return res.status(204).json({
+                    message: "Hệ thống đang hết thẻ loại và mệnh giá này",
+                    status: false,
+                });
+            }
+        } catch (e) {
+            console.log("Lỗi bên trong tìm thẻ");
+            return;
         }
     }
     catch (e) {

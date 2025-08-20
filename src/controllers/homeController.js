@@ -309,7 +309,8 @@ const byCard = async (req, res) => {
                 const randomCard = await findCard[randomIndex];
                 console.log(randomCard.id);
                 await addCardTable(randomCard.id, idUserAdd);
-                await deleteCard(randomCard.id);
+                await deleteCard(randomCard);
+                console.log("vẫn chạy");
                 return res.status(200).json({
                     data: randomCard,
                     status: true,

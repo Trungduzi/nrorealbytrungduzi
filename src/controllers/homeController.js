@@ -294,6 +294,7 @@ const addCardTable = async (idCard, idUser) => {
         serial,
         idUser,
     })
+    return;
 }
 
 const byCard = async (req, res, userId) => {

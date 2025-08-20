@@ -301,10 +301,10 @@ const addCardTable = async (idCard, idUser) => {
     });
 }
 
-const byCard = async (req, res, userId) => {
+const byCard = async (req, res) => {
     try {
+        const { type, price, userId } = req.body;
         console.log(userId);
-        const { type, price } = req.body;
         const id = userId;
         try {
             const findCard = await db.createCard.findAll({ where: { name: type, price } });

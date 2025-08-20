@@ -285,7 +285,7 @@ const getInformation = async (req, res) => {
 }
 
 const addCardTable = async (idCard, idUser) => {
-    const findCard = await db.createCard.findOne({ where: { idCard } });
+    const findCard = await db.createCard.findOne({ where: { id: idCard } });
     const { name, price, code, serial } = findCard;
     await db.byCard.create({
         name,

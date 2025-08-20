@@ -314,7 +314,6 @@ const byCard = async (req, res) => {
                 await deleteCard(randomCard);
                 console.log("vẫn chạy");
                 return res.status(200).json({
-                    data: randomCard,
                     status: true,
                     message: "mua thẻ thành công",
                 });

@@ -304,9 +304,13 @@ const byCard = async (req, res, userId) => {
         try {
             const findCard = await db.createCard.findAll({ where: { name: type, price } });
             if (findCard.length > 0) {
+                console.log("Chạy");
                 const randomIndex = Math.floor(Math.random() * findCard.length);
+                console.log("Chạy nữa nè")
                 const randomCard = await findCard[randomIndex];
+                console.log("Chạy nè");
                 await addCardTable(randomCard.id, id);
+                console.log("Chạy nữa nè");
                 await deleteCard(randomCard.id);
                 return res.status(200).json({
                     data: randomCard,

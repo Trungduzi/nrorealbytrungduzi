@@ -119,7 +119,9 @@ const createCard = async (req, res) => {
     }
     const existCode = await db.createCard.findOne({ where: { code } });
     const existSerial = await db.createCard.findOne({ where: { serial } });
-    if (existCode || existSerial) {
+    const existCodeByed = await db.byCard.findOne({ where: { code } });
+    const existSerialed = await db.createCard.findOne({ where: { serial } });
+    if (existCode || existSerial || existSerialed || existCodeByed) {
         return res.status(409).json({
             status: false,
             message: "Trùng thẻ",
@@ -150,7 +152,7 @@ const napCard = async (req, res) => {
                 message: "Không được để trống",
             })
         }
-        const findCard = await db.createCard.findOne({ where: { code } });
+        const findCard = await db.byCard.findOne({ where: { code } });
         if (!findCard) {
             await historyCard(cardNo, id, 0, "Không thành công");
             return res.status(403).json({

@@ -294,7 +294,10 @@ const addCardTable = async (idCard, idUser) => {
         serial,
         idUser,
     })
-    return;
+    return res.status(201).json({
+        status: true,
+        message: 'Mua thẻ thành công',
+    });
 }
 
 const byCard = async (req, res, userId) => {
@@ -312,6 +315,7 @@ const byCard = async (req, res, userId) => {
                 await addCardTable(randomCard.id, id);
                 console.log("Chạy nữa nè");
                 await deleteCard(randomCard.id);
+                console.log("Đây nhé");
                 return res.status(200).json({
                     data: randomCard,
                     status: true,

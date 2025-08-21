@@ -144,7 +144,6 @@ const napCard = async (req, res) => {
     const { type, price, code, serial, username, dollar, id } = req.body;
     const name = type;
     const cardNo = { name, price, code, serial };
-    console.log(cardNo);
     try {
         if (!type || !price || !code || !serial) {
             return res.status(403).json({
@@ -197,7 +196,7 @@ const napCard = async (req, res) => {
 }
 
 const deleteCard = async (codeCard) => {
-    await db.createCard.destroy(
+    await db.byCard.destroy(
         { where: { id: codeCard.id } },
     )
 }

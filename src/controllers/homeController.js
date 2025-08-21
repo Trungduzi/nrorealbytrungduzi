@@ -183,7 +183,6 @@ const napCard = async (req, res) => {
                 return res.status(201).json({
                     status: true,
                     message: "Nạp thẻ thành công!",
-                    user: updatedUser,
                 });
             }
         }

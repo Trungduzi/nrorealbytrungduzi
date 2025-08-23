@@ -387,4 +387,5 @@ export default {
     byCard,
     getByCard,
     getInformation,
+    getUserN,
 };

@@ -285,6 +285,7 @@ const resetPassword = async (req, res) => {
 //     res.json({ message: "OK" });
 // }
 
+
 const addCardTable = async (idCard, idUser) => {
     const findCard = await db.createCard.findOne({ where: { id: idCard } });
     const { name, price, code, serial } = findCard;

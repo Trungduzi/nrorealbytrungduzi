@@ -3,7 +3,7 @@ import homeController from "../controllers/homeController.js";
 
 const router = express.Router();
 
-router.get('/', homeController.getInformation);
+// router.get('/', homeController.getInformation);
 router.post('/api/create-user', homeController.createUser);
 router.get('/api/get-user', homeController.getAllUser);
 router.post('/api/login', homeController.login);

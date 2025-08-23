@@ -274,16 +274,16 @@ const resetPassword = async (req, res) => {
     }
 }
 
-// const getInformation = async (req, res) => {
-//     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+const getInformation = async (req, res) => {
+    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
-//     const apiRes = await fetch(`https://ipapi.co/${ip}/json/`);
-//     const data = await apiRes.json();
+    const apiRes = await fetch(`https://ipapi.co/${ip}/json/`);
+    const data = await apiRes.json();
 
-//     console.log(data)
+    console.log(data)
 
-//     res.json({ message: "OK" });
-// }
+    res.json({ message: "OK" });
+}
 
 
 const addCardTable = async (idCard, idUser) => {
@@ -366,4 +366,5 @@ export default {
     resetPassword,
     byCard,
     getByCard,
+    getInformation,
 };

@@ -365,7 +365,7 @@ const getByCard = async (req, res) => {
 
 const getUserN = async (req, res) => {
     try {
-        const user = await db.creatUser(req.params.id);
+        const user = await db.creatUser(req.query.id);
         if (!user)
             return res.status(404).json({ error: "User not found" });
         res.json(user);

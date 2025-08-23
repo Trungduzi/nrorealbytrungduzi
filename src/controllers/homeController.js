@@ -337,7 +337,7 @@ const byCard = async (req, res) => {
 
             }
             else {
-                return res.status(204).json({
+                return res.status(404).json({
                     message: "Hệ thống đang hết thẻ loại và mệnh giá này",
                     status: false,
                 });

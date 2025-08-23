@@ -34,9 +34,13 @@ module.exports = {
         defaultValue: 0,
         type: Sequelize.DECIMAL(20, 3),
       },
+      role: {
+        allowNull: false,
+        type: Sequelize.STRING,
+      },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,

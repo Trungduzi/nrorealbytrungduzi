@@ -26,9 +26,8 @@ export const getHistory = async (req, res) => {
     const { id } = req.body;
     try {
         const historyCard = await db.history.findAll({
-            where: { userId: id }, // 🔥 ĐẢM BẢO ĐÚNG FIELD
+            where: { userId: id },
             order: [['createdAt', 'DESC']],
-            // limit: 1 //  KHÔNG CÓ LIMIT nếu muốn lấy tất cả
         });
         return res.status(200).json(historyCard);
     } catch (error) {
@@ -187,7 +186,7 @@ const napCard = async (req, res) => {
         }
 
     } catch (e) {
-        console.error("❌ Lỗi khi nạp thẻ:", e);
+        console.error("Lỗi khi nạp thẻ:", e);
         return res.status(404).json({
             status: false,
             message: "Lỗi ngay từ bước này rồi",
@@ -197,6 +196,12 @@ const napCard = async (req, res) => {
 
 const deleteCard = async (codeCard) => {
     await db.byCard.destroy(
+        { where: { id: codeCard.id } },
+    )
+}
+
+const deleteCardHistory = async (codeCard) => {
+    await db.createCard.destroy(
         { where: { id: codeCard.id } },
     )
 }
@@ -225,7 +230,7 @@ const getHistoryCard = async (req, res) => {
         console.log(userId);
         const cardExpress = await db.history.findAll({
             where: { userId: userId },
-            order: [['createdAt', 'DESC']] // mới nhất trước
+            order: [['createdAt', 'DESC']]
         });
         return res.status(200).json(cardExpress);
     } catch (error) {
@@ -269,20 +274,16 @@ const resetPassword = async (req, res) => {
     }
 }
 
-const getInformation = async (req, res) => {
-    const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
+// const getInformation = async (req, res) => {
+//     const ip = req.headers["x-forwarded-for"] || req.socket.remoteAddress;
 
-    // Gọi API tra cứu vị trí theo IP
-    const apiRes = await fetch(`https://ipapi.co/${ip}/json/`);
-    const data = await apiRes.json();
+//     const apiRes = await fetch(`https://ipapi.co/${ip}/json/`);
+//     const data = await apiRes.json();
 
-    // Không in ra, chỉ dùng nội bộ
-    // await saveToDatabase({ ip, location: data });
-    console.log(data)
+//     console.log(data)
 
-    // Trả về cho front-end dữ liệu khác, không chứa IP
-    res.json({ message: "OK" });
-}
+//     res.json({ message: "OK" });
+// }
 
 const addCardTable = async (idCard, idUser) => {
     const findCard = await db.createCard.findOne({ where: { id: idCard } });
@@ -318,7 +319,7 @@ const byCard = async (req, res) => {
                 const randomCard = await findCard[randomIndex];
                 console.log(randomCard.id);
                 await addCardTable(randomCard.id, idUserAdd);
-                await deleteCard(randomCard);
+                await deleteCardHistory(randomCard);
                 console.log("vẫn chạy");
                 return res.status(200).json({
                     data: randomCard,
@@ -362,7 +363,6 @@ export default {
     getHistory,
     getHistoryCard,
     resetPassword,
-    getInformation,
     byCard,
     getByCard,
 };

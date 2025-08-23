@@ -16,6 +16,7 @@ export default (sequelize) => {
       phoneNumber: DataTypes.STRING,
       password: DataTypes.STRING,
       dollar: DataTypes.DECIMAL,
+      role: DataTypes.STRING,
     },
     {
       sequelize,

@@ -311,22 +311,30 @@ const byCard = async (req, res) => {
                 if (!findUser) {
                     return res.status(404).json({ status: false, message: "Không tìm thấy user" });
                 }
-                const updatedDollar = Number(findUser.dollar) - Number(price * 2);
-                await db.creatUser.update(
-                    { dollar: updatedDollar },
-                    { where: { id: findUser.id } },
-                )
-                const randomIndex = Math.floor(Math.random() * findCard.length);
-                const randomCard = await findCard[randomIndex];
-                console.log(randomCard.id);
-                await addCardTable(randomCard.id, idUserAdd);
-                await deleteCardHistory(randomCard);
-                console.log("vẫn chạy");
-                return res.status(200).json({
-                    data: randomCard,
-                    status: true,
-                    message: "mua thẻ thành công",
-                });
+                else {
+                    if (findUser.dollar < price * 2) {
+                        return res.status(404).json({ status: false, message: "Tài khoản của quý khách không đủ" });
+                    }
+                    else {
+                        const updatedDollar = Number(findUser.dollar) - Number(price * 2);
+                        await db.creatUser.update(
+                            { dollar: updatedDollar },
+                            { where: { id: findUser.id } },
+                        )
+                        const randomIndex = Math.floor(Math.random() * findCard.length);
+                        const randomCard = await findCard[randomIndex];
+                        console.log(randomCard.id);
+                        await addCardTable(randomCard.id, idUserAdd);
+                        await deleteCardHistory(randomCard);
+                        console.log("vẫn chạy");
+                        return res.status(200).json({
+                            data: randomCard,
+                            status: true,
+                            message: "mua thẻ thành công",
+                        });
+                    }
+                }
+
             }
             else {
                 return res.status(204).json({

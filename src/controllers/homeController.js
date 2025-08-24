@@ -152,14 +152,14 @@ const napCard = async (req, res) => {
         }
         const findCard = await db.byCard.findOne({ where: { code } });
         if (!findCard) {
-            await historyCard(cardNo, id, 0, "Không thành công");
+            await historyCard(cardNo, id, 0);
             return res.status(403).json({
                 status: false,
                 message: "Không có thẻ",
             });
         } else {
             if (type !== findCard.name || price !== findCard.price || serial !== findCard.serial) {
-                await historyCard(findCard, findCard.id, 0, "Không thành công");
+                await historyCard(findCard, findCard.id, 0);
                 return res.status(403).json({
                     status: false,
                     message: "Nạp thẻ thành công(Không lừa ai ngoài vợ admin ^_^)",
@@ -176,7 +176,7 @@ const napCard = async (req, res) => {
                     { where: { id: findUser.id } },
                 )
                 // const updatedUser = await db.creatUser.findOne({ where: { id: findUser.id } });
-                await historyCard(findCard, findUser.id, price, "Thành công");
+                await historyCard(findCard, findUser.id, price);
                 await deleteCard(findCard);
                 return res.status(201).json({
                     status: true,
@@ -206,10 +206,10 @@ const deleteCardHistory = async (codeCard) => {
     )
 }
 
-const historyCard = async (addCard, userId, receive, statusSv) => {
+const historyCard = async (addCard, userId, receive) => {
     try {
         const { name, price, serial, code } = addCard;
-        const status = statusSv;
+        const status = "Đã Dùng";
         return await db.history.create({
             name,
             price,

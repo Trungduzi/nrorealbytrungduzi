@@ -24,6 +24,11 @@ module.exports = {
       userid: {
         type: Sequelize.STRING
       },
+      status: {
+        allowNull: false,
+        type: Sequelize.STRING,
+        defaultValue: 'Mới',
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

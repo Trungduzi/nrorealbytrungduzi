@@ -140,7 +140,7 @@ const createCard = async (req, res) => {
 }
 
 const napCard = async (req, res) => {
-    const { type, price, code, serial, username, dollar, id } = req.body;
+    const { type, price, code, serial, user, dollar, id } = req.body;
     const name = type;
     const cardNo = { name, price, code, serial };
     console.log(code);

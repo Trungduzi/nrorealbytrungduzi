@@ -177,8 +177,10 @@ const napCard = async (req, res) => {
                     { where: { id: findUser.id } },
                 )
                 // const updatedUser = await db.creatUser.findOne({ where: { id: findUser.id } });
-                await historyCard(findCard, findUser.id, price);
-                await deleteCard(findCard);
+                await Promise.all([
+                    historyCard(findCard, findUser.id, price),
+                    deleteCard(findCard)
+                ]);
                 return res.status(201).json({
                     status: true,
                     message: "Nạp thẻ thành công!",
@@ -253,7 +255,7 @@ const resetPassword = async (req, res) => {
         }
         const isMatch = bcrypt.compareSync(password, user.password);
         if (!isMatch) {
-            return res.status(401).json({
+            return res.status(404).json({
                 status: false,
                 meassage: "Mật khẩu sai",
             });

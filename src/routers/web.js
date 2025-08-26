@@ -15,5 +15,6 @@ router.post("/api/reset-password", homeController.resetPassword);
 router.post("/api/mua-the", homeController.byCard);
 router.get("/api/get-by-card", homeController.getByCard);
 router.get("/api/user", homeController.getUserN);
+router.get("/api/get-card-created", homeController.getCardCreated);
 
 export default router;

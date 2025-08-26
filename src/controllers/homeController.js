@@ -379,6 +379,19 @@ const getUserN = async (req, res) => {
     }
 }
 
+const getCardCreated = async (req, res) => {
+    try {
+        const cardss = await db.createCard.findAll();
+        const number = cardss.length;
+        return res.status(200).json({
+            number: number,
+        })
+    } catch (e) {
+        console.log("Lỗi lấy bên homeController dòng 386", e)
+        return res.error(405).json("Lỗi bên homeController dòng 387");
+    }
+}
+
 export default {
     createUser,
     getAllUser,
@@ -392,4 +405,5 @@ export default {
     getByCard,
     getInformation,
     getUserN,
+    getCardCreated,
 };
